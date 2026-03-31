@@ -96,7 +96,7 @@ log "Setting env paths..."
 HEADAS=${HEADAS:-$HOME/opt/heasoft-6.35.1/x86_64-apple-darwin22.6.0}
 SAS_DIR=${SAS_DIR:-$HOME/opt/sas/xmmsas_22.1.0-a8f2c2afa-20250303}
 SAS_CCFPATH=${SAS_CCFPATH:-$HOME/opt/sas/ccf}
-BASE_ODF_DIR=${BASE_ODF_DIR:-$HOME/Desktop/Wittman_Research/XSorter/XMM/observation_data}
+BASE_ODF_DIR=${BASE_ODF_DIR:-$HOME/Desktop/Wittman_Research/Code/xmm-pipeline/observation_data}
 
 
 # -- Export Variables --
