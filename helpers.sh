@@ -399,7 +399,7 @@ get_ccds() {
     log "Running emanom for $det..."
     mkdir -p "$QA_DIR"
     local logf="${QA_DIR}/${det}_anom.log"
-    emanom eventfile="$evf" keepcorner=no > "$logf" 2>&1 || true
+    emanom eventfile="$evf" keepcorner=no writelog=no > "$logf" 2>&1 || true
 
     # Parse CCD status lines and log them
 
