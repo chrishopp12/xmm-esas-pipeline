@@ -247,11 +247,11 @@ EOF
 ftlist ${DET}_final_grp.fits+1 data column=CHANNEL,GROUPING,QUALITY | \
 awk '/^[[:space:]]*[0-9]/{ch=$1; gp=$2; q=$3; if(q>0) {start=-1; next}
      if(start<0) start=ch; if(gp==1){ if(ch==start) printf "%d %d\n",ch,ch; start=-1 }}' \
-> /tmp/${DET}_singles.txt
+> /tmp/${OBS_ID}_${DET}_singles.txt
 
-if [ -s /tmp/${DET}_singles.txt ]; then
+if [ -s /tmp/${OBS_ID}_${DET}_singles.txt ]; then
   grppha ${DET}_final_grp.fits ${DET}_final_grp.fits << EOF | tee -a "$tmp_grppha"
-bad @/tmp/${DET}_singles.txt
+bad @/tmp/${OBS_ID}_${DET}_singles.txt
 show quality
 write !${DET}_final_grp.fits
 exit
@@ -259,8 +259,8 @@ EOF
 fi
 
 # how many channels are now BAD?
-ftselect infile=${DET}_final_grp.fits+1 outfile=/tmp/bad.fits expression="QUALITY>0" clobber=yes
-ftlist /tmp/bad.fits+1 K | awk -F= '/NAXIS2/{print "QUALITY>0 rows:", $2}'
+ftselect infile=${DET}_final_grp.fits+1 outfile=/tmp/${OBS_ID}_${DET}_bad.fits expression="QUALITY>0" clobber=yes
+ftlist /tmp/${OBS_ID}_${DET}_bad.fits+1 K | awk -F= '/NAXIS2/{print "QUALITY>0 rows:", $2}'
 
 
 
@@ -319,32 +319,32 @@ tot_ch=$(
 )
 
 # how many grouped bins? (count GROUPING==1)
-ftselect infile="${DET}_final_grp.fits+1" outfile="/tmp/${DET}_grpends.fits" \
+ftselect infile="${DET}_final_grp.fits+1" outfile="/tmp/${OBS_ID}_${DET}_grpends.fits" \
          expression="GROUPING==1" clobber=yes >/dev/null 2>&1
 n_bins=$(
-  ftlist "/tmp/${DET}_grpends.fits+1" K 2>/dev/null \
+  ftlist "/tmp/${OBS_ID}_${DET}_grpends.fits+1" K 2>/dev/null \
   | awk -F= '/NAXIS2/{gsub(/[[:space:]]/,"",$2); print $2}'
 )
 
 # how many channels flagged bad?
-ftselect infile="${DET}_final_grp.fits+1" outfile="/tmp/${DET}_bad.fits" \
+ftselect infile="${DET}_final_grp.fits+1" outfile="/tmp/${OBS_ID}_${DET}_bad.fits" \
          expression="QUALITY>0" clobber=yes >/dev/null 2>&1
 n_bad=$(
-  ftlist "/tmp/${DET}_bad.fits+1" K 2>/dev/null \
+  ftlist "/tmp/${OBS_ID}_${DET}_bad.fits+1" K 2>/dev/null \
   | awk -F= '/NAXIS2/{gsub(/[[:space:]]/,"",$2); print $2}'
 )
 
 # peek at the first few rows (optional)
 ftlist "${DET}_final_grp.fits+1" data column="CHANNEL,GROUPING,QUALITY" rows=1-40 | head -n 40 \
-  > "/tmp/${DET}_group_preview.txt"
+  > "/tmp/${OBS_ID}_${DET}_group_preview.txt"
 
 echo "[${DET}] channels=${tot_ch}  bins=${n_bins}  bad_rows=${n_bad}" | tee -a "$LOG_FILE"
 [[ -n "${LOG_FILE:-}" ]] && {
   echo "[${DET}] First rows CHANNEL,GROUPING,QUALITY →" >> "$LOG_FILE"
-  cat "/tmp/${DET}_group_preview.txt" >> "$LOG_FILE"
+  cat "/tmp/${OBS_ID}_${DET}_group_preview.txt" >> "$LOG_FILE"
 }
 
-rm -f "/tmp/${DET}_grpends.fits" "/tmp/${DET}_bad.fits" "/tmp/${DET}_group_preview.txt"
+rm -f "/tmp/${OBS_ID}_${DET}_grpends.fits" "/tmp/${OBS_ID}_${DET}_bad.fits" "/tmp/${OBS_ID}_${DET}_group_preview.txt"
 # --- end audit ---
 
 

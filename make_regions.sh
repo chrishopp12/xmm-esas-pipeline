@@ -111,16 +111,16 @@ python3 "${REGION_SCRIPT}" \
   --script-path "${SCRIPTS_DIR}" \
   --obs-id "${OBS_ID}" \
   --region both \
-   >/tmp/regions.out
+   >/tmp/${OBS_ID}_regions.out
 
 
 # Parse the printed "src: circle(...)" / "bkg: circle(...)" lines in order m1,m2,pn
-M1_SRC=$(awk '/^src:/{print $2}' /tmp/regions.out | sed -n '1p')
-M2_SRC=$(awk '/^src:/{print $2}' /tmp/regions.out | sed -n '2p')
-PN_SRC=$(awk '/^src:/{print $2}' /tmp/regions.out | sed -n '3p')
-M1_BKG=$(awk '/^bkg:/{print $2}' /tmp/regions.out | sed -n '1p')
-M2_BKG=$(awk '/^bkg:/{print $2}' /tmp/regions.out | sed -n '2p')
-PN_BKG=$(awk '/^bkg:/{print $2}' /tmp/regions.out | sed -n '3p')
+M1_SRC=$(awk '/^src:/{print $2}' /tmp/${OBS_ID}_regions.out | sed -n '1p')
+M2_SRC=$(awk '/^src:/{print $2}' /tmp/${OBS_ID}_regions.out | sed -n '2p')
+PN_SRC=$(awk '/^src:/{print $2}' /tmp/${OBS_ID}_regions.out | sed -n '3p')
+M1_BKG=$(awk '/^bkg:/{print $2}' /tmp/${OBS_ID}_regions.out | sed -n '1p')
+M2_BKG=$(awk '/^bkg:/{print $2}' /tmp/${OBS_ID}_regions.out | sed -n '2p')
+PN_BKG=$(awk '/^bkg:/{print $2}' /tmp/${OBS_ID}_regions.out | sed -n '3p')
 
 cat > "${CONFIG_DIR}/regions.env.tmp" <<EOF
 M1_REG='${M1_SRC}'
@@ -138,10 +138,10 @@ TAG_regions_py='[regions_py]'
 push_tag "$TAG_regions_py"
 while IFS= read -r line; do
     log_info "$line"
-done < /tmp/regions.out
+done < /tmp/${OBS_ID}_regions.out
 pop_tag "$TAG_regions_py"
 
-rm -f /tmp/regions.out
+rm -f /tmp/${OBS_ID}_regions.out
 
 log "Wrote ${CONFIG_DIR#$BASE_DIR/}/regions.env"
 
