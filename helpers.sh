@@ -381,7 +381,7 @@ get_ccds() {
   # Config file (if exists and has a value — including explicit empty)
   elif [[ -s "$config_file" ]]; then
     set -a; . "$config_file"; set +a
-    if [[ -v ${env_var} ]]; then
+    if declare -p "$env_var" &>/dev/null; then
       ccds="${!env_var}"
       source="Config"
     fi
