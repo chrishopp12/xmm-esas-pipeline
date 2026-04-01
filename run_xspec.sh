@@ -215,7 +215,7 @@ xspec < "$PIPE" 2>&1 | tee -a "$LOG_FILE" &
   # -- Select channels --
   echo "notice all"
   echo "ignore bad"
-  echo "ignore 1-3:**-0.1 7.0-**"
+  echo "ignore 1-3:**-0.3 10.0-**"
 
   # -- Load base model --
   echo "@savexspec.xcm"
