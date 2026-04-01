@@ -128,7 +128,7 @@ log()       { _log_line -INFO-  "$*"; }
 log_error() { _log_line -ERROR- "$*"; }
 log_warn()  { _log_line -WARN-  "$*"; }
 
-die() { log_warn "$*"; exit 1; }
+die() { log_error "$*"; exit 1; }
 require () { command -v "$1" >/dev/null 2>&1 || die "Missing required command: $1"; }
 
 

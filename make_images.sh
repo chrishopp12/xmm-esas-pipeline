@@ -153,10 +153,10 @@ make_ccd_mask() {
   # Warn + apply defaults
   if [[ -z "$bad_list" || "$bad_list" == "none" ]]; then
     if [[ "$det" == "m1" ]]; then
-      log_error "WARNING: No CCD exclusion list for MOS1 — using default bad CCDs 3,6"
+      log_warn "No CCD exclusion list for MOS1 — using default bad CCDs 3,6"
       bad_list="3,6"
     elif [[ "$det" == "m2" ]]; then
-      log_error "WARNING: No CCD exclusion list for MOS2 — using default 'none'"
+      log_warn "No CCD exclusion list for MOS2 — using default 'none'"
       bad_list=""
     fi
   fi

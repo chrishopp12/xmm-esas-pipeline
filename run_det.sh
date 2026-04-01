@@ -215,7 +215,7 @@ case "$VIG_MODE" in
          log "Applying vignetting correction to observation file..."
          run_verbose "evigweight ineventset='$(allevc_of "$DET")'" ;;
   none)  : ;;  # do nothing
-  *) log_error "Invalid --vig mode: $VIG_MODE (use both|blank|obs|none)"; exit 1;;
+  *) die "Invalid --vig mode: $VIG_MODE (use both|blank|obs|none)";;
 esac
 
 # Background flare filtering
