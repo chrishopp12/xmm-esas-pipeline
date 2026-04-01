@@ -22,7 +22,7 @@
 #   --emax          <float>         Cheese maximum energy                         [default: 7200]
 #   --cheese-scale  <float>         Cheese scale factor                           [default: 0.5]
 #   --cheese-rate   <float>         Cheese rate                                   [default: 1.0]
-#   --dist-NN       <float>         Distance for nearest neighbor                 [default: 40.0]
+#   --dist-nn       <float>         Distance for nearest neighbor                 [default: 40.0]
 #   --verbose                       Verbosity: none|errors|all|0|1|2|yes|no       [default: errors]
 #   -v | --verbose                  Enable verbose SAS output
 #   -h | --help                     Show help
@@ -95,7 +95,7 @@ Options:
   --emax          <float>     Cheese maximum energy                         [default: ${EMAX_DEFAULT}]
   --cheese-scale  <float>     Cheese scale factor                           [default: ${CHEESE_SCALE_DEFAULT}]
   --cheese-rate   <float>     Cheese rate                                   [default: ${CHEESE_RATE_DEFAULT}]
-  --dist-NN       <float>     Distance for nearest neighbor                 [default: ${DIST_NN_DEFAULT}]
+  --dist-nn       <float>     Distance for nearest neighbor                 [default: ${DIST_NN_DEFAULT}]
   --verbose       <level>     Verbosity: none|errors|all|0|1|2|yes|no       [default: ${VERBOSITY_DEFAULT}]
   -v | --verbose              Enable verbose SAS output
   -h | --help                 Show help
