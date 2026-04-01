@@ -223,9 +223,9 @@ bash ${SCRIPTS_DIR}/proton_blank.sh ${BKG_RATE:+--rate "$BKG_RATE"} --det "$DET"
 
 # Apply mask region
 
-run_verbose "evselect table='$(allevc_of "$DET")' withfilteredset=Y filteredset='${FOLDER}/${DET}clean_mask.fits' destruct=Y keepfilteroutput=T imagebinning=binSize imageset='${FOLDER}/${DET}image_mask.fits' withimageset=yes xcolumn=DETX ycolumn=DETY ximagebinsize=80 yimagebinsize=80 expression='region(${FOLDER}/${NAME}-bkgregtdet.fits,DETX,DETY)'"
+run_verbose "evselect table='$(allevc_of "$DET")' withfilteredset=Y filteredset='${FOLDER}/${DET}clean_mask.fits' destruct=Y keepfilteroutput=T imagebinning=binSize imageset='${FOLDER}/${DET}image_mask.fits' withimageset=yes xcolumn=DETX ycolumn=DETY ximagebinsize=80 yimagebinsize=80 expression='region(${FOLDER}/${NAME}-bkgregtdet.fits,DETX,DETY)${EXCL_EXPR}'"
 
-run_verbose "evselect table='${FOLDER}/${DET}bkg_clean.fits' withfilteredset=Y filteredset='${FOLDER}/${DET}bkg_clean_mask.fits' destruct=Y keepfilteroutput=T imagebinning=binSize imageset='${FOLDER}/${DET}bkg_image_mask.fits' withimageset=yes xcolumn=DETX ycolumn=DETY ximagebinsize=80 yimagebinsize=80 expression='region(${FOLDER}/${NAME}-bkgregtdet.fits,DETX,DETY)'"
+run_verbose "evselect table='${FOLDER}/${DET}bkg_clean.fits' withfilteredset=Y filteredset='${FOLDER}/${DET}bkg_clean_mask.fits' destruct=Y keepfilteroutput=T imagebinning=binSize imageset='${FOLDER}/${DET}bkg_image_mask.fits' withimageset=yes xcolumn=DETX ycolumn=DETY ximagebinsize=80 yimagebinsize=80 expression='region(${FOLDER}/${NAME}-bkgregtdet.fits,DETX,DETY)${EXCL_EXPR}'"
 
 bash ${SCRIPTS_DIR}/spectra_src.sh ${REG_SRC:+--src-reg "$REG_SRC"} --det "$DET" --verbose "$SAS_VERBOSE_LEVEL"
 bash ${SCRIPTS_DIR}/spectra_bkg.sh ${REG_BKG:+--bkg-reg "$REG_BKG"} --det "$DET" --verbose "$SAS_VERBOSE_LEVEL"
