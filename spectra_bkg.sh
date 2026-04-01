@@ -151,8 +151,10 @@ log "Creating observation background spectrum"
 run_verbose "evselect table='${FOLDER}/${DET}clean_mask.fits' withzcolumn=Y withzerrorcolumn=N withspectrumset=yes spectrumset='${FOLDER}/${DET}source2_spectrum.fits' energycolumn=PI spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=${SPEC_CHANNEL}  imagebinning=binSize imageset='${FOLDER}/${DET}source2_spectrum_image.fits' withimageset=yes xcolumn=DETX ycolumn=DETY ximagebinsize=80 yimagebinsize=80 expression='${EXP} && ((DETX,DETY) IN $BKG_REG_COORD)'"
 
 run_verbose "backscale spectrumset='${FOLDER}/${DET}source2_spectrum.fits' badpixlocation='${FOLDER}/${DET}clean_mask.fits'"
-run_verbose "rmfgen spectrumset='${FOLDER}/${DET}source2_spectrum.fits' rmfset='${FOLDER}/${DET}source2.rmf' detmaptype=flat"
-run_verbose "arfgen spectrumset='${FOLDER}/${DET}source2_spectrum.fits' arfset='${FOLDER}/${DET}source2.arf' withrmfset=yes rmfset='${FOLDER}/${DET}source2.rmf' badpixlocation='${FOLDER}/${DET}clean_mask.fits' extendedsource=yes withbadpixcorr=Y modelee=N withdetbounds=Y filterdss=N detmaptype=flat detxbins=1 detybins=1 withsourcepos=Y sourcecoords=tel sourcex=0 sourcey=0 applyxcaladjustment=yes"
+# Background region RMF/ARF not used by double subtraction (mathpha operates in count space).
+# Uncomment if needed for diagnostic fits of the background region spectrum.
+# run_verbose "rmfgen spectrumset='${FOLDER}/${DET}source2_spectrum.fits' rmfset='${FOLDER}/${DET}source2.rmf' detmaptype=flat"
+# run_verbose "arfgen spectrumset='${FOLDER}/${DET}source2_spectrum.fits' arfset='${FOLDER}/${DET}source2.arf' withrmfset=yes rmfset='${FOLDER}/${DET}source2.rmf' badpixlocation='${FOLDER}/${DET}clean_mask.fits' extendedsource=yes withbadpixcorr=Y modelee=N withdetbounds=Y filterdss=N detmaptype=flat detxbins=1 detybins=1 withsourcepos=Y sourcecoords=tel sourcex=0 sourcey=0 applyxcaladjustment=yes"
 
 # Blank sky
 log "Creating blank sky background spectrum"

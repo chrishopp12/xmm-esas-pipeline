@@ -158,8 +158,10 @@ log "Creating blank sky source spectrum"
 run_verbose "evselect table='${FOLDER}/${DET}bkg_clean_mask.fits' withzcolumn=Y withzerrorcolumn=N withspectrumset=yes spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' energycolumn=PI spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=$SPEC_CHANNEL imagebinning=binSize imageset='${FOLDER}/${DET}bkg_spectrum_image.fits' withimageset=yes xcolumn=DETX ycolumn=DETY ximagebinsize=80 yimagebinsize=80 expression='${EXP} && ((DETX,DETY) IN ${SRC_REG_COORD})'"
 
 run_verbose "backscale spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' badpixlocation='${FOLDER}/${DET}bkg_clean_mask.fits'"
-run_verbose "rmfgen spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' rmfset='${FOLDER}/${DET}bkg.rmf' detmaptype=flat"
-run_verbose "arfgen spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' arfset='${FOLDER}/${DET}bkg.arf' withrmfset=yes rmfset='${FOLDER}/${DET}bkg.rmf' badpixlocation='${FOLDER}/${DET}bkg_clean_mask.fits' extendedsource=yes withbadpixcorr=Y modelee=N withdetbounds=Y filterdss=Y detmaptype=flat detxbins=1 detybins=1 withsourcepos=Y sourcecoords=tel sourcex=0 sourcey=0 applyxcaladjustment=yes"
+# Blank sky RMF/ARF not used by double subtraction (mathpha operates in count space).
+# Uncomment if needed for diagnostic fits of the blank sky spectrum.
+# run_verbose "rmfgen spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' rmfset='${FOLDER}/${DET}bkg.rmf' detmaptype=flat"
+# run_verbose "arfgen spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' arfset='${FOLDER}/${DET}bkg.arf' withrmfset=yes rmfset='${FOLDER}/${DET}bkg.rmf' badpixlocation='${FOLDER}/${DET}bkg_clean_mask.fits' extendedsource=yes withbadpixcorr=Y modelee=N withdetbounds=Y filterdss=Y detmaptype=flat detxbins=1 detybins=1 withsourcepos=Y sourcecoords=tel sourcex=0 sourcey=0 applyxcaladjustment=yes"
 
 
 pop_tag "$TAG_spec_src"
