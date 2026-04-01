@@ -175,8 +175,8 @@ source "${BASE_DIR}/scripts/resolve_paths.sh" --base-dir "$BASE_DIR" --obs-id "$
       if [[ $(norm_flag "$reply") == "yes" ]]; then
           mkdir -p "$CONFIG_DIR"
           cat > "$SPECTRA_ENV_FILE" <<EOF
-  export Z_CONFIG="$Z"
-  export NH_CONFIG="$NH"
+export Z_CONFIG="$Z"
+export NH_CONFIG="$NH"
 EOF
           log "Saved Z and NH to ${SPECTRA_ENV_FILE#$BASE_DIR}"
       else
