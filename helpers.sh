@@ -378,17 +378,17 @@ get_ccds() {
     ccds="${!env_var}"
     source="ENV"
 
-  # Config file (if exists and has non-empty value)
+  # Config file (if exists and has a value — including explicit empty)
   elif [[ -s "$config_file" ]]; then
     set -a; . "$config_file"; set +a
-    if [[ -n "${!env_var:-}" ]]; then
+    if [[ -v ${env_var} ]]; then
       ccds="${!env_var}"
       source="Config"
     fi
   fi
 
-  # If all else fails, use emanom 
-  if [[ -z "${ccds:-}" ]]; then
+  # If all else fails, use emanom
+  if [[ -z "${ccds+set}" ]]; then
     local evf
 
     evf="$(evt_of "$det")"
