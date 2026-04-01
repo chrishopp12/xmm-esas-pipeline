@@ -151,7 +151,7 @@ run_verbose "evselect table='${FOLDER}/${DET}clean_mask.fits' withzcolumn=Y with
 
 run_verbose "backscale spectrumset='${FOLDER}/${DET}source_spectrum.fits' badpixlocation='${FOLDER}/${DET}clean_mask.fits'"
 run_verbose "rmfgen spectrumset='${FOLDER}/${DET}source_spectrum.fits' rmfset='${FOLDER}/${DET}source.rmf' detmaptype=flat"
-run_verbose "arfgen spectrumset='${FOLDER}/${DET}source_spectrum.fits' arfset='${FOLDER}/${DET}source.arf' withrmfset=yes rmfset='${FOLDER}/${DET}source.rmf' badpixlocation='${FOLDER}/${DET}clean_mask.fits' extendedsource=yes withbadpixcorr=Y modelee=N withdetbounds=Y filterdss=N detmaptype=flat detxbins=1 detybins=1 withsourcepos=Y sourcecoords=tel sourcex=0 sourcey=0 applyxcaladjustment=yes"
+run_verbose "arfgen spectrumset='${FOLDER}/${DET}source_spectrum.fits' arfset='${FOLDER}/${DET}source.arf' withrmfset=yes rmfset='${FOLDER}/${DET}source.rmf' badpixlocation='${FOLDER}/${DET}clean_mask.fits' extendedsource=yes withbadpixcorr=Y modelee=N withdetbounds=Y filterdss=Y detmaptype=flat detxbins=1 detybins=1 withsourcepos=Y sourcecoords=tel sourcex=0 sourcey=0 applyxcaladjustment=yes"
 
 # Blank sky
 log "Creating blank sky source spectrum"
@@ -159,7 +159,7 @@ run_verbose "evselect table='${FOLDER}/${DET}bkg_clean_mask.fits' withzcolumn=Y 
 
 run_verbose "backscale spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' badpixlocation='${FOLDER}/${DET}bkg_clean_mask.fits'"
 run_verbose "rmfgen spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' rmfset='${FOLDER}/${DET}bkg.rmf' detmaptype=flat"
-run_verbose "arfgen spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' arfset='${FOLDER}/${DET}bkg.arf' withrmfset=yes rmfset='${FOLDER}/${DET}bkg.rmf' badpixlocation='${FOLDER}/${DET}bkg_clean_mask.fits' extendedsource=yes withbadpixcorr=Y modelee=N withdetbounds=Y filterdss=N detmaptype=flat detxbins=1 detybins=1 withsourcepos=Y sourcecoords=tel sourcex=0 sourcey=0 applyxcaladjustment=yes"
+run_verbose "arfgen spectrumset='${FOLDER}/${DET}bkg_spectrum.fits' arfset='${FOLDER}/${DET}bkg.arf' withrmfset=yes rmfset='${FOLDER}/${DET}bkg.rmf' badpixlocation='${FOLDER}/${DET}bkg_clean_mask.fits' extendedsource=yes withbadpixcorr=Y modelee=N withdetbounds=Y filterdss=Y detmaptype=flat detxbins=1 detybins=1 withsourcepos=Y sourcecoords=tel sourcex=0 sourcey=0 applyxcaladjustment=yes"
 
 
 pop_tag "$TAG_spec_src"
