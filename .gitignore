@@ -28,3 +28,16 @@ __pycache__/
 # -----------------------
 .env
 config.*
+
+# -----------------------
+# Temporary / scratch files
+# -----------------------
+*.tmp
+*.swp
+*~
+
+# -----------------------
+# One-off / miscellaneous
+# -----------------------
+batch_refit.sh
+
